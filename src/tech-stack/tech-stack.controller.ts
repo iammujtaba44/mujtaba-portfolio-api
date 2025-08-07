@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { TechStackService } from './tech-stack.service';
 import { CreateTechStackDto } from './dto/create-tech-stack.dto';
 import { UpdateTechStackDto } from './dto/update-tech-stack.dto';
@@ -19,16 +27,19 @@ export class TechStackController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.techStackService.findOne(+id);
+    return this.techStackService.findOne(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateTechStackDto: UpdateTechStackDto) {
-    return this.techStackService.update(+id, updateTechStackDto);
+  update(
+    @Param('id') id: string,
+    @Body() updateTechStackDto: UpdateTechStackDto,
+  ) {
+    return this.techStackService.update(id, updateTechStackDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.techStackService.remove(+id);
+    return this.techStackService.remove(id);
   }
 }

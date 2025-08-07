@@ -125,4 +125,16 @@ export class StringRegexUtils {
   static isValidPhone(phone: string): boolean {
     return this.PHONE_REGEX.test(phone);
   }
+
+  /**
+   * Convert snake_case or kebab-case to proper title case display name
+   * Example: 'open_source' -> 'Open Source', 'web_app' -> 'Web App'
+   */
+  static toDisplayName(str: string): string {
+    return str
+      .replace(/[_-]/g, ' ') // Replace underscores and hyphens with spaces
+      .split(' ')
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+      .join(' ');
+  }
 }

@@ -25,21 +25,21 @@ export class AppConfigsController {
     return this.appConfigsService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.appConfigsService.findOne(+id);
+  @Get(':key')
+  findOne(@Param('key') key: string) {
+    return this.appConfigsService.findOne(key);
   }
 
-  @Patch(':id')
+  @Patch(':key')
   update(
-    @Param('id') id: string,
+    @Param('key') key: string,
     @Body() updateAppConfigDto: UpdateAppConfigDto,
   ) {
-    return this.appConfigsService.update(+id, updateAppConfigDto);
+    return this.appConfigsService.update(key, updateAppConfigDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.appConfigsService.remove(+id);
+  @Delete(':key')
+  remove(@Param('key') key: string) {
+    return this.appConfigsService.remove(key);
   }
 }

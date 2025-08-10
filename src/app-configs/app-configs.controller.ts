@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { AppConfigsService } from './app-configs.service';
 import { CreateAppConfigDto } from './dto/create-app-config.dto';
 import { UpdateAppConfigDto } from './dto/update-app-config.dto';
@@ -17,18 +25,21 @@ export class AppConfigsController {
     return this.appConfigsService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.appConfigsService.findOne(+id);
+  @Get(':key')
+  findOne(@Param('key') key: string) {
+    return this.appConfigsService.findOne(key);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateAppConfigDto: UpdateAppConfigDto) {
-    return this.appConfigsService.update(+id, updateAppConfigDto);
+  @Patch(':key')
+  update(
+    @Param('key') key: string,
+    @Body() updateAppConfigDto: UpdateAppConfigDto,
+  ) {
+    return this.appConfigsService.update(key, updateAppConfigDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.appConfigsService.remove(+id);
+  @Delete(':key')
+  remove(@Param('key') key: string) {
+    return this.appConfigsService.remove(key);
   }
 }

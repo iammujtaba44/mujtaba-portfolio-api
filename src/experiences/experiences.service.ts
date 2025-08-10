@@ -1,26 +1,67 @@
 import { Injectable } from '@nestjs/common';
 import { CreateExperienceDto } from './dto/create-experience.dto';
 import { UpdateExperienceDto } from './dto/update-experience.dto';
+import { Repository } from 'typeorm';
+import { Experiences } from './entities/experience.entity';
+import { InjectRepository } from '@nestjs/typeorm';
+import { ObjectId } from 'mongodb';
 
 @Injectable()
 export class ExperiencesService {
-  create(createExperienceDto: CreateExperienceDto) {
-    return 'This action adds a new experience';
+  constructor(
+    @InjectRepository(Experiences)
+    private repository: Repository<Experiences>,
+  ) {}
+
+  async create(createExperienceDto: CreateExperienceDto) {
+    try {
+      const entity = new Experiences();
+      Object.assign(entity, createExperienceDto);
+      const data = this.repository.create(entity);
+      const response = await this.repository.save(data);
+      return {
+        success: true,
+        date: response,
+      };
+    } catch (error) {
+      return {
+        success: false,
+        date: error,
+      };
+    }
   }
 
-  findAll() {
-    return `This action returns all experiences`;
+  async findAll() {
+    const response = await this.repository.find();
+    return {
+      success: true,
+      date: response,
+    };
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} experience`;
+  async findOne(id: string) {
+    const response = await this.repository.findOne({
+      where: { _id: new ObjectId(id) },
+    });
+    return {
+      success: true,
+      date: response,
+    };
   }
 
-  update(id: number, updateExperienceDto: UpdateExperienceDto) {
-    return `This action updates a #${id} experience`;
+  async update(id: string, updateExperienceDto: UpdateExperienceDto) {
+    const response = await this.repository.update(id, updateExperienceDto);
+    return {
+      success: true,
+      date: response,
+    };
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} experience`;
+  async remove(id: string) {
+    const response = await this.repository.delete(id);
+    return {
+      success: true,
+      date: response,
+    };
   }
 }

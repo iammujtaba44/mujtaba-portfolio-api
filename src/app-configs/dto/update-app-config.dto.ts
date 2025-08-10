@@ -1,4 +1,6 @@
-import { PartialType } from '@nestjs/mapped-types';
+import { PartialType, OmitType } from '@nestjs/mapped-types';
 import { CreateAppConfigDto } from './create-app-config.dto';
 
-export class UpdateAppConfigDto extends PartialType(CreateAppConfigDto) {}
+export class UpdateAppConfigDto extends PartialType(
+  OmitType(CreateAppConfigDto, ['key'] as const),
+) {}

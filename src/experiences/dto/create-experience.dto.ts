@@ -1,4 +1,10 @@
-import { IsArray, IsEnum, IsNotEmpty, IsString } from 'class-validator';
+import {
+  IsArray,
+  IsEnum,
+  IsNotEmpty,
+  IsNumber,
+  IsString,
+} from 'class-validator';
 import { ExperienceRoleType } from '../entities/experience.entity';
 
 export class CreateExperienceDto {
@@ -25,6 +31,10 @@ export class CreateExperienceDto {
   @IsArray()
   @IsNotEmpty()
   technologies: string[];
+
+  @IsNumber()
+  @IsNotEmpty()
+  order: number;
 
   @IsEnum(ExperienceRoleType)
   @IsNotEmpty()

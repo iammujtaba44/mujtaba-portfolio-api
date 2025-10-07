@@ -37,6 +37,9 @@ export class Experiences {
   @Column()
   roleTypeDisplayName: string;
 
+  @Column()
+  order: number;
+
   @BeforeInsert()
   @BeforeUpdate()
   generateRoleTypeDisplayName() {

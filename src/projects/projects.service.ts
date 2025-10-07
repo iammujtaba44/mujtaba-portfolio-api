@@ -26,6 +26,7 @@ export class ProjectsService {
 
   async findAll() {
     const response = await this.repository.find();
+    response.sort((a, b) => a.order - b.order);
     return {
       success: true,
       data: response,

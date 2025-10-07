@@ -37,6 +37,9 @@ export class Projects {
   @Column({ default: false })
   render: boolean;
 
+  @Column()
+  order: number;
+
   @BeforeInsert()
   @BeforeUpdate()
   generateType() {

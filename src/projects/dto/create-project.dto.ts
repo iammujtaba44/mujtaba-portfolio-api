@@ -2,6 +2,7 @@ import {
   IsArray,
   IsEnum,
   IsNotEmpty,
+  IsNumber,
   IsString,
   ValidateNested,
 } from 'class-validator';
@@ -33,6 +34,10 @@ export class CreateProjectDto {
   @ValidateNested({ each: true })
   @Type(() => ProjectLink)
   appLinks: ProjectLink[];
+
+  @IsNumber()
+  @IsNotEmpty()
+  order: number;
 }
 
 class ProjectLink {

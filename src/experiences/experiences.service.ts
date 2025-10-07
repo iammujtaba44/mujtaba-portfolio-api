@@ -33,6 +33,7 @@ export class ExperiencesService {
 
   async findAll() {
     const response = await this.repository.find();
+    response.sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
     return {
       success: true,
       date: response,

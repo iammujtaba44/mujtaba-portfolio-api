@@ -22,6 +22,9 @@ export class TechStack {
   @Column()
   stacks: Stacks[];
 
+  @Column()
+  order: number;
+
   @BeforeInsert()
   @BeforeUpdate()
   generateType() {

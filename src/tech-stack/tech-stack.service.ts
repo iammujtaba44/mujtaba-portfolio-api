@@ -27,6 +27,7 @@ export class TechStackService {
 
   async findAll() {
     const response = await this.techStackRepository.find();
+    response.sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
     return {
       success: true,
       data: response,
